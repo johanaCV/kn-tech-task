@@ -1,0 +1,22 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>City View</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" type="text/css"/>
+</head>
+<body>
+    <div class="container-fluid" style="max-width: 1000px; margin: 0 auto;">
+        <a th:href="@{/v1.0/cities}">Return to City List</a>
+        <br>
+        <br>
+
+        <div class="card" style="max-width: 1000px;">
+            <h5 class="card-header" th:text="${city.id} + ' | ' + ${city.name}"></h5>
+            <img class="card-img-top" th:src="${city.photoUri}">
+            <div class="card-body">
+                <a class="btn btn-primary"
+                   th:href="@{/v1.0/cities/edit/{id}(id=${city.id})}">Edit</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>City List</title>
+
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/styles/css/pagination.css}" type="text/css"/>
+    <link crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+          integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+          referrerpolicy="no-referrer" rel="stylesheet"/>
+</head>
+<body>
+    <div class="container-fluid" style="max-width: 1000px; margin: 0 auto;">
+
+        <div>
+            <form th:action="@{/v1.0/cities}" method="get">
+                <input type="text" placeholder="Enter city's name" th:name="name"/>
+                <input class="btn btn-primary" type="submit" value="Search"/>
+            </form>
+        </div>
+
+        <div class="alert alert-primary" role="alert" th:text="${success}" th:if="${success}"></div>
+
+        <table class="table table-hover table-responsive-xl">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Photo</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="city : ${cityPage.content}">
+                    <th scope="row" th:text="${city.id}"></th>
+                    <td th:text="${city.name}"></td>
+                    <td><img width="400" height="300" th:src="${city.photoUri}"></td>
+                    <td><a class="fa-regular fa-pen-to-square"
+                           th:href="@{/v1.0/cities/edit/{id}(id=${city.id})}">Edit</a></td>
+                </tr>
+            </tbody>
+        </table>
+
+
+        <div th:if="${cityPage.totalPages > 0}" class="pagination"
+             th:each="pageNumber : ${pageNumbers}">
+            <a th:href="@{/v1.0/cities(size=${cityPage.size}, page=${pageNumber})}"
+               th:text=${pageNumber}
+               th:class="${pageNumber==cityPage.number + 1} ? active"></a>
+        </div>
+    </div>
+
+</body>
+</html>

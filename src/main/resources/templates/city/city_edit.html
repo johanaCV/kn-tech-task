@@ -1,0 +1,31 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit City</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" type="text/css"/>
+</head>
+<body>
+    <div class="container-fluid" style="max-width: 1000px; margin: 0 auto;">
+        <a th:href="@{/v1.0/cities}">Return to City List</a>
+        <br>
+        <br>
+        <h2>Edit City</h2>
+
+        <div>
+            <form action="#" th:action="@{/v1.0/cities/{id}(id=${city.id})}" th:object="${city}" method="post">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input class="form-control" type="text" th:field="*{name}" id="name" placeholder="Name">
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="photoUri">Photo Uri</label>
+                    <input class="form-control" type="text" th:field="*{photoUri}" id="photoUri" placeholder="Enter new photo uri">
+                </div>
+                <br>
+                <input type="submit" class="btn btn-primary" value="Update City">
+            </form>
+        </div>
+
+    </div>
+</body>
+</html>
